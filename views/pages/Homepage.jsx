@@ -7,6 +7,8 @@ class HomePage extends React.Component {
                 <link rel="stylesheet" href="/CSS/app.css" />
             </head>
             <h1>Welcome to my Blog App</h1>
+
+            <a href={"/views/blogs/Blogs.jsx"}>Blogs</a>
         </div>)
     }
 }
