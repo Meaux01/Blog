@@ -13,6 +13,10 @@ router.get('/', async (req, res) => {
         res.status(403).send('Cannot get')
     }
 })
+router.get('/new', async (req, res) => {
+    // res.send('words')
+    res.render('blogs/New.jsx')
+})
 
 // GET: Blog by ID
 router.get('/:id', async (req, res) => {
@@ -24,25 +28,23 @@ router.get('/:id', async (req, res) => {
         res.status(403).send('Cannot get')
     }
 })
-router.get('/new', async (req, res) => {
-    try {
-        const newBlog = await BlogModel.create(req.body)
-        res.render('blogs/New.jsx',{newBlog})
-    } catch (error) {
-        console.log(error);
-        res.status(403).send('Cannot get')
-    }
-})
-
-
 // POST: CREATE a New Blog
+// ^ Create a new Blog
 router.post('/', async (req, res) => {
-    try{
+    // ^ Try-Catch Method
+    try {
+        if (req.body.sponsored === "on") {
+            req.body.sponsored = true;
+          } else {
+            req.body.sponsored = false;
+          }
+      
         const newBlog = await BlogModel.create(req.body)
-        // res.render('blogs/New.jsx',newBlog)
-        res.send(newBlog)
-    } catch(error){
-        console.log(error);
+        console.log(newBlog)
+        res.redirect('/blog')
+        // res.send('Blog successfully created!')
+    } catch(error) {
+        console.log(error)
         res.status(403).send('Cannot create')
     }
 })

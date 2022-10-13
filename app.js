@@ -14,9 +14,11 @@ app.use(express.static('public'))
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/blog', require('./controllers/BlogRouter'))
 app.use('/user', require('./controllers/UserRouter'))
-app.use(express.urlencoded({ extended: false }));
+
 
 
 
