@@ -24,11 +24,22 @@ router.get('/:id', async (req, res) => {
         res.status(403).send('Cannot get')
     }
 })
+router.get('/new', async (req, res) => {
+    try {
+        const newBlog = await BlogModel.create(req.body)
+        res.render('blogs/New.jsx',{newBlog})
+    } catch (error) {
+        console.log(error);
+        res.status(403).send('Cannot get')
+    }
+})
+
 
 // POST: CREATE a New Blog
 router.post('/', async (req, res) => {
     try{
         const newBlog = await BlogModel.create(req.body)
+        // res.render('blogs/New.jsx',newBlog)
         res.send(newBlog)
     } catch(error){
         console.log(error);
